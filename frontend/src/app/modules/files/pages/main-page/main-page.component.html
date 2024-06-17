@@ -1,0 +1,69 @@
+<div>
+  <div class="top">
+    <app-search />
+    <button
+      class="top__add"
+      mat-mini-fab
+      color="primary"
+      (click)="hiddenfileinput.click()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <input
+      class="hidden"
+      #hiddenfileinput
+      multiple
+      type="file"
+      (change)="uploadFile($event)"
+      (click)="hiddenfileinput.value = null!"
+    />
+  </div>
+
+  <div class="container">
+    @if (draggingOver$ | async) {
+    <div class="container__dnd">
+      <div class="container__dnd__info">
+        <div class="info-wrapper">
+          <mat-icon class="info-wrapper__icon">file_upload</mat-icon>
+          <h1>Drop files here to upload</h1>
+        </div>
+      </div>
+      <input
+        type="file"
+        multiple
+        (change)="uploadFile($event)"
+        (click)="hiddenfileinput.value = null!"
+      />
+    </div>
+
+    } @for (file of filteredFiles(); track file.id) {
+    <app-item-card [file]="file" />
+    } @empty {
+    <div class="empty">
+      @if (loading()) {
+      <mat-spinner />
+      } @else {
+      <div>No files found that contain the phrase: {{ query() }}</div>
+      }
+    </div>
+    }
+  </div>
+</div>
+
+@if(uploadingFiles().length > 0) {
+<div class="uploading">
+  @for (uploadingFile of uploadingFiles(); track uploadingFile.localId) {
+  <div class="uploading__file">
+    <div>{{ uploadingFile.file.name }}</div>
+    <div>
+      @if (uploadingFile.progress !== 100) {
+      <app-progress [progress]="uploadingFile.progress" />
+      } @else {
+      <p>Saving...</p>
+      }
+    </div>
+  </div>
+  <hr />
+  }
+</div>
+}

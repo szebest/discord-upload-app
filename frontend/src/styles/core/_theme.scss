@@ -1,0 +1,59 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$mat-theming-primary: mat.m2-define-palette(mat.$m2-indigo-palette, 500);
+$mat-theming-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$mat-theming-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $mat-theming-primary,
+      accent: $mat-theming-accent,
+      warn: $mat-theming-warn,
+    ),
+  )
+);
+
+@mixin set-css-variables($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  $primary-contrast: map-get($primary, contrast);
+  $primary: map-remove($primary, contrast);
+
+  $accent-contrast: map-get($accent, contrast);
+  $accent: map-remove($accent, contrast);
+
+  $warn-contrast: map-get($warn, contrast);
+  $warn: map-remove($warn, contrast);
+
+  @each $key, $value in $primary {
+    --primary-#{$key}: #{$value};
+  }
+  @each $key, $value in $accent {
+    --accent-#{$key}: #{$value};
+  }
+  @each $key, $value in $warn {
+    --warn-#{$key}: #{$value};
+  }
+  @each $key, $value in $foreground {
+    --foreground-#{$key}: #{$value};
+  }
+  @each $key, $value in $background {
+    --background-#{$key}: #{$value};
+  }
+}
+
+@mixin theme($theme) {
+  @include mat.all-component-themes($theme);
+  @include set-css-variables($theme);
+}
+
+body {
+  @include theme($theme);
+}

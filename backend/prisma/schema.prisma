@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model File {
+  id         Int          @id @default(autoincrement())
+  name       String
+  fileChunks FileChunk[]
+  uploadedAt DateTime     @default(now())
+}
+
+model FileChunk {
+  file         File   @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  fileId       Int
+  messageId    String @id
+  size         Int
+}

@@ -1,0 +1,40 @@
+<div class="wrapper" [class.loading]="file().loading">
+  <div class="item">
+    <div class="item__info">
+      <span
+        >Filename: <span class="highlight">{{ file().name }}</span></span
+      >
+      <span
+        >Size: <span class="highlight">{{ file().totalSize }} bytes</span></span
+      >
+      <span
+        >Uploaded at:
+        <span class="highlight">{{
+          file().uploadedAt | date : "medium"
+        }}</span></span
+      >
+    </div>
+    <div class="item__actions">
+      <button
+        mat-icon-button
+        (click)="downloadFile(file().id)"
+        [disabled]="progress() !== null || file().loading"
+      >
+        <mat-icon>download</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        (click)="deleteFile(file().id)"
+        [disabled]="progress() !== null || file().loading"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  @if (progress()) {
+  <app-progress [progress]="progress()!" />
+  } @else if (progress() !== null) {
+  <div>Loading...</div>
+  }
+</div>

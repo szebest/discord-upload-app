@@ -1,0 +1,16 @@
+@import "core/variables";
+
+:host {
+  width: 100%;
+
+  .progress-wrapper {
+    position: relative;
+    height: $spacing-16;
+
+    .progress {
+      position: absolute;
+      inset: 0;
+      background-color: var(--primary-300);
+    }
+  }
+}

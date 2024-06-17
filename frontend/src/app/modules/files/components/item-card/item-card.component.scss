@@ -1,0 +1,36 @@
+@import "core/variables";
+
+:host {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-16;
+
+    &.loading {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: $spacing-16;
+
+      &__info {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-8;
+
+        .highlight {
+          font-weight: bold;
+        }
+      }
+
+      &__actions {
+        display: flex;
+        gap: $spacing-4;
+      }
+    }
+  }
+}

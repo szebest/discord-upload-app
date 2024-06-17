@@ -1,0 +1,10 @@
+@import "core/variables";
+
+:host {
+  .search-form {
+    &__search-text {
+      --mdc-outlined-text-field-container-shape: #{$spacing-20};
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+<form [formGroup]="searchForm" class="search-form" (submit)="search()">
+  <mat-form-field class="search-form__search-text" appearance="outline" subscriptSizing="dynamic">
+    <input matInput matNativeControl placeholder="Search" formControlName="searchText" (keyup)="search()">
+  </mat-form-field>
+</form>
