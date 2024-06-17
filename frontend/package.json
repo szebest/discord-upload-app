@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "install": "npm run install --force",
+    "install:force": "npm run install --force",
     "serve": "node dist/files-store/browser",
     "serve:ssr:files-store": "node dist/files-store/server/server.mjs"
   },
