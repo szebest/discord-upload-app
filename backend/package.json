@@ -4,6 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
+    "build": "tsc",
     "watch": "nodemon --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.ts",
     "watch:serve": "npx src/index.ts"
   },
